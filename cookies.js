@@ -55,13 +55,15 @@ function showCookiesForTab(tabs) {
         cookieList.appendChild(p);
       }
 
-      
-      let storagecookies = document.getElementById('storage');
-      let li = document.createElement("li");
-      let content = document.createTextNode(connections[tab.url].usesStorage);
+      // for(let s of connections[tab.url].usesStorage){
+          let storagecookies = document.getElementById('storage');
+          let li = document.createElement("li");
+          let content = document.createTextNode(connections[tab.url].usesStorage);
 
-      li.appendChild(content);
-      storagecookies.appendChild(li);
+          li.appendChild(content);
+          storagecookies.appendChild(li);
+        
+      // }
 
 
       if (connections[tab.url].urlList.length > 0) {

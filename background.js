@@ -51,7 +51,7 @@ function listener(details) {
       if(isEmpty(connections[details.originUrl])){
         var value = {
           urlList : [details.url],
-          usesStorage : "none"
+          usesStorage : [details.originUrl]
         }
         var conn = {
           [details.originUrl] : value
