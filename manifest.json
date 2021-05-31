@@ -1,0 +1,36 @@
+{
+  "browser_action": {
+    "browser_style": true,
+    "default_title": "List cookies in the active tab",
+    "default_popup": "menu.html",
+    "default_icon": {
+      "19": "icons/puzzle.png",
+      "38": "icons/puzzle.png"
+    }
+  },
+  "description": "Integrated interface",
+  "icons": {
+    "48": "icons/puzzle.png",
+    "96": "icons/puzzle.png"
+  },
+
+  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/list-cookies",
+
+  "manifest_version": 2,
+
+  "name": "Integrated Application",
+
+  "version": "0.2",
+
+  "permissions": ["cookies","<all_urls>","tabs","webRequest", "webRequestBlocking", "*://*/*", "storage"],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "applications": {
+    "gecko": {
+      "strict_min_version": "57.0a1"
+    }
+  }
+}
