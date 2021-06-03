@@ -15,8 +15,7 @@ function Key(myObject) {
 }
 
 function handleRemoved(tabId, removeInfo) {
-  // browser.storage.local.remove(browser.tabs.get(tabId).originUrl) 
-  browser.storage.local.clear() //TODO - FIX REMOVE
+  browser.storage.local.clear() 
 }
 
 function logStorageChange(changes, area) {

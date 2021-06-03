@@ -1,12 +1,11 @@
 function showCookiesForTab(tabs) {
   //get the first tab object in the array
   let tab = tabs.pop();
+  let sessionStorage = window.sessionStorage;
 
   //get all cookies in the domain
   var gettingAllCookies = browser.cookies.getAll({url: tab.url});
   var gettingAllConnections = browser.storage.local.get();
-  // var gettingAllStorage = browser.storage.local.get(tab.url);
-
 
   // Execute script in the current tab
 
@@ -15,9 +14,7 @@ function showCookiesForTab(tabs) {
       //set the header of the panel
       var activeTabUrlHeader = document.getElementById('header-title');
       var textHeader = document.createTextNode(tab.title);
-      // var textHeader2 = document.createTextNode("- Uses Storage: " + connections[tab.url].urlList);
       activeTabUrlHeader.appendChild(textHeader);
-      // activeTabUrlHeader.appendChild(textHeader2);
 
       browser.tabs.executeScript(tab.id, { code: `var _lsTotal = 0, _xLen, _x; for (_x in localStorage) { _xLen = (((localStorage[_x].length || 0) + (_x.length || 0)) * 2); _lsTotal += _xLen; console.log(_x.substr(0, 50) + " = " + (_xLen / 1024).toFixed(2) + " KB") }; (_lsTotal / 1024).toFixed(2) + " KB";` },
       function(result){
@@ -55,16 +52,54 @@ function showCookiesForTab(tabs) {
         cookieList.appendChild(p);
       }
 
-      // for(let s of connections[tab.url].usesStorage){
-          let storagecookies = document.getElementById('storage');
-          let li = document.createElement("li");
-          let content = document.createTextNode(connections[tab.url].usesStorage);
 
-          li.appendChild(content);
-          storagecookies.appendChild(li);
-        
+      // var archive = [],
+      //   keys = Object.keys(localStorage),
+      //   i = 0, key;
+
+      // for (; key = keys[i]; i++) {
+      //     archive.push( key + '=' + localStorage.getItem(key));
       // }
 
+
+      // let storagecookies = document.getElementById('storage');
+      // let li = document.createElement("li");
+      // let li2 = document.createElement("li");
+      // let content = document.createTextNode(JSON.stringify(keys));
+      // let content2 = document.createTextNode("Original URL: " + connections[tab.url].usesStorage);
+
+      // li2.appendChild(content2);
+      // li.appendChild(content);
+      // storagecookies.appendChild(li2);
+      // storagecookies.appendChild(li);
+      
+      
+      if(tabs[0]){
+
+        for ([k,v] of Object.entries(localStorage)) {
+          let storagecookies = document.getElementById('storage');
+          let li = document.createElement("li");
+          let li2 = document.createElement("li");
+          let content = document.createTextNode(`<span>${k} : ${v}</span><br>`);
+          let content2 = document.createTextNode("Original URL: " + connections[tab.url].usesStorage);
+
+          li2.appendChild(content2);
+          li.appendChild(content);
+          storagecookies.appendChild(li2);
+          storagecookies.appendChild(li);
+        }
+      }else{
+        let storagecookies = document.getElementById('storage');
+        let li = document.createElement("li");
+        let li2 = document.createElement("li");
+        let content = document.createTextNode("No storage details to show");
+        let content2 = document.createTextNode("Original URL: " + connections[tab.url].usesStorage);
+    
+        li2.appendChild(content2);
+        li.appendChild(content);
+        storagecookies.appendChild(li2);
+        storagecookies.appendChild(li);
+      }
 
       if (connections[tab.url].urlList.length > 0) {
         //add an <li> item with the name and value of the cookie to the list
