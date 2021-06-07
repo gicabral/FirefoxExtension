@@ -53,41 +53,25 @@ function showCookiesForTab(tabs) {
       }
 
 
-      // var archive = [],
-      //   keys = Object.keys(localStorage),
-      //   i = 0, key;
+      var archive = [],
+        keys = Object.keys(localStorage),
+        i = 0, key;
 
-      // for (; key = keys[i]; i++) {
-      //     archive.push( key + '=' + localStorage.getItem(key));
-      // }
+      for (; key = keys[i]; i++) {
+          archive.push( key + '=' + localStorage.getItem(key));
+      }
 
-
-      // let storagecookies = document.getElementById('storage');
-      // let li = document.createElement("li");
-      // let li2 = document.createElement("li");
-      // let content = document.createTextNode(JSON.stringify(keys));
-      // let content2 = document.createTextNode("Original URL: " + connections[tab.url].usesStorage);
-
-      // li2.appendChild(content2);
-      // li.appendChild(content);
-      // storagecookies.appendChild(li2);
-      // storagecookies.appendChild(li);
-      
-      
-      if(tabs[0]){
-
-        for ([k,v] of Object.entries(localStorage)) {
-          let storagecookies = document.getElementById('storage');
-          let li = document.createElement("li");
-          let li2 = document.createElement("li");
-          let content = document.createTextNode(`<span>${k} : ${v}</span><br>`);
-          let content2 = document.createTextNode("Original URL: " + connections[tab.url].usesStorage);
-
-          li2.appendChild(content2);
-          li.appendChild(content);
-          storagecookies.appendChild(li2);
-          storagecookies.appendChild(li);
-        }
+      if(archive.length > 0){
+        let storagecookies = document.getElementById('storage');
+        let li = document.createElement("li");
+        let li2 = document.createElement("li");
+        let content = document.createTextNode(archive);
+        let content2 = document.createTextNode("Original URL: " + connections[tab.url].usesStorage);
+  
+        li2.appendChild(content2);
+        li.appendChild(content);
+        storagecookies.appendChild(li2);
+        storagecookies.appendChild(li);
       }else{
         let storagecookies = document.getElementById('storage');
         let li = document.createElement("li");
@@ -100,6 +84,34 @@ function showCookiesForTab(tabs) {
         storagecookies.appendChild(li2);
         storagecookies.appendChild(li);
       }
+      
+      
+      // if(tabs[0]){
+
+      //   for ([k,v] of Object.entries(localStorage)) {
+      //     let storagecookies = document.getElementById('storage');
+      //     let li = document.createElement("li");
+      //     let li2 = document.createElement("li");
+      //     let content = document.createTextNode(`<span>${k} : ${v}</span><br>`);
+      //     let content2 = document.createTextNode("Original URL: " + connections[tab.url].usesStorage);
+
+      //     li2.appendChild(content2);
+      //     li.appendChild(content);
+      //     storagecookies.appendChild(li2);
+      //     storagecookies.appendChild(li);
+      //   }
+      // }else{
+      //   let storagecookies = document.getElementById('storage');
+      //   let li = document.createElement("li");
+      //   let li2 = document.createElement("li");
+      //   let content = document.createTextNode("No storage details to show");
+      //   let content2 = document.createTextNode("Original URL: " + connections[tab.url].usesStorage);
+    
+      //   li2.appendChild(content2);
+      //   li.appendChild(content);
+      //   storagecookies.appendChild(li2);
+      //   storagecookies.appendChild(li);
+      // }
 
       if (connections[tab.url].urlList.length > 0) {
         //add an <li> item with the name and value of the cookie to the list
